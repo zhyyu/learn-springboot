@@ -23,7 +23,7 @@ public class JdbcTemplateTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @PostConstruct
+//    @PostConstruct
     private void testQueryAll() {
         queryAll();
     }
