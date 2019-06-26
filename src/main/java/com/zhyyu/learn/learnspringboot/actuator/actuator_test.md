@@ -526,3 +526,165 @@ management.endpoints.web.exposure.include=*
 }
 
 ```
+
+- http://localhost:8000/actuator/mappings
+    - 查看servlets servletFilters handlerMapping 信息
+```json
+{
+	"contexts": {
+		"application": {
+			"mappings": {
+				"dispatcherServlets": {
+					"dispatcherServlet": [{
+							"handler": "ResourceHttpRequestHandler [class path resource [META-INF/resources/], class path resource [resources/], class path resource [static/], class path resource [public/], ServletContext resource [/], class path resource []]",
+							"predicate": "/**/favicon.ico",
+							"details": null
+						}, {
+							"handler": "Actuator web endpoint 'auditevents'",
+							"predicate": "{GET /actuator/auditevents, produces [application/vnd.spring-boot.actuator.v2+json || application/json]}",
+							"details": {
+								"handlerMethod": {
+									"className": "org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping.OperationHandler",
+									"name": "handle",
+									"descriptor": "(Ljavax/servlet/http/HttpServletRequest;Ljava/util/Map;)Ljava/lang/Object;"
+								},
+								"requestMappingConditions": {
+									"consumes": [],
+									"headers": [],
+									"methods": ["GET"],
+									"params": [],
+									"patterns": ["/actuator/auditevents"],
+									"produces": [{
+											"mediaType": "application/vnd.spring-boot.actuator.v2+json",
+											"negated": false
+										}, {
+											"mediaType": "application/json",
+											"negated": false
+										}
+									]
+								}
+							}
+						}, {
+							"handler": "Actuator web endpoint 'beans'",
+							"predicate": "{GET /actuator/beans, produces [application/vnd.spring-boot.actuator.v2+json || application/json]}",
+							"details": {
+								"handlerMethod": {
+									"className": "org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping.OperationHandler",
+									"name": "handle",
+									"descriptor": "(Ljavax/servlet/http/HttpServletRequest;Ljava/util/Map;)Ljava/lang/Object;"
+								},
+								"requestMappingConditions": {
+									"consumes": [],
+									"headers": [],
+									"methods": ["GET"],
+									"params": [],
+									"patterns": ["/actuator/beans"],
+									"produces": [{
+											"mediaType": "application/vnd.spring-boot.actuator.v2+json",
+											"negated": false
+										}, {
+											"mediaType": "application/json",
+											"negated": false
+										}
+									]
+								}
+							}
+						}, {
+							"handler": "public java.lang.String com.zhyyu.learn.learnspringboot.controller.RestControllerTest.hello()",
+							"predicate": "{ /test/hello}",
+							"details": {
+								"handlerMethod": {
+									"className": "com.zhyyu.learn.learnspringboot.controller.RestControllerTest",
+									"name": "hello",
+									"descriptor": "()Ljava/lang/String;"
+								},
+								"requestMappingConditions": {
+									"consumes": [],
+									"headers": [],
+									"methods": [],
+									"params": [],
+									"patterns": ["/test/hello"],
+									"produces": []
+								}
+							}
+						}
+					]
+				},
+				"servletFilters": [{
+						"urlPatternMappings": ["/*"],
+						"servletNameMappings": [],
+						"name": "webMvcMetricsFilter",
+						"className": "org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter"
+					}, {
+						"urlPatternMappings": ["/*"],
+						"servletNameMappings": [],
+						"name": "requestContextFilter",
+						"className": "org.springframework.boot.web.servlet.filter.OrderedRequestContextFilter"
+					}, {
+						"urlPatternMappings": ["/*"],
+						"servletNameMappings": [],
+						"name": "Tomcat WebSocket (JSR356) Filter",
+						"className": "org.apache.tomcat.websocket.server.WsFilter"
+					}, {
+						"urlPatternMappings": ["/*"],
+						"servletNameMappings": [],
+						"name": "hiddenHttpMethodFilter",
+						"className": "org.springframework.boot.web.servlet.filter.OrderedHiddenHttpMethodFilter"
+					}, {
+						"urlPatternMappings": ["/*"],
+						"servletNameMappings": [],
+						"name": "characterEncodingFilter",
+						"className": "org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter"
+					}, {
+						"urlPatternMappings": ["/*"],
+						"servletNameMappings": [],
+						"name": "httpTraceFilter",
+						"className": "org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter"
+					}, {
+						"urlPatternMappings": ["/*"],
+						"servletNameMappings": [],
+						"name": "formContentFilter",
+						"className": "org.springframework.boot.web.servlet.filter.OrderedFormContentFilter"
+					}
+				],
+				"servlets": [{
+						"mappings": [],
+						"name": "default",
+						"className": "org.apache.catalina.servlets.DefaultServlet"
+					}, {
+						"mappings": ["/"],
+						"name": "dispatcherServlet",
+						"className": "org.springframework.web.servlet.DispatcherServlet"
+					}
+				]
+			}
+		}
+	}
+}
+```
+
+- http://localhost:8000/actuator/metrics
+    - 程序运行时情况可查key
+```json
+{
+	"names": ["jvm.memory.max", "jvm.threads.states", "http.server.requests", "jvm.gc.memory.promoted", "jvm.memory.used", "jvm.gc.max.data.size", "jdbc.connections.max", "jdbc.connections.min", "jvm.gc.pause", "jvm.memory.committed", "system.cpu.count", "logback.events", "tomcat.global.sent", "jvm.buffer.memory.used", "tomcat.sessions.created", "jvm.threads.daemon", "system.cpu.usage", "jvm.gc.memory.allocated", "tomcat.global.request.max", "hikaricp.connections.idle", "hikaricp.connections.pending", "tomcat.global.request", "tomcat.sessions.expired", "hikaricp.connections", "jvm.threads.live", "jvm.threads.peak", "tomcat.global.received", "hikaricp.connections.active", "hikaricp.connections.creation", "process.uptime", "tomcat.sessions.rejected", "process.cpu.usage", "tomcat.threads.config.max", "jvm.classes.loaded", "hikaricp.connections.max", "hikaricp.connections.min", "jvm.classes.unloaded", "tomcat.global.error", "tomcat.sessions.active.current", "tomcat.sessions.alive.max", "jvm.gc.live.data.size", "hikaricp.connections.usage", "tomcat.threads.current", "hikaricp.connections.timeout", "jvm.buffer.count", "jvm.buffer.total.capacity", "tomcat.sessions.active.max", "hikaricp.connections.acquire", "tomcat.threads.busy", "process.start.time"]
+}
+
+```
+
+- http://localhost:8000/actuator/metrics/system.cpu.usage
+    - 给定key 对应值
+```json
+{
+	"name": "system.cpu.usage",
+	"description": "The \"recent cpu usage\" for the whole system",
+	"baseUnit": null,
+	"measurements": [{
+			"statistic": "VALUE",
+			"value": 1.0
+		}
+	],
+	"availableTags": []
+}
+
+```
