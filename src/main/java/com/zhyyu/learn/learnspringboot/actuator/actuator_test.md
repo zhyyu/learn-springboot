@@ -688,3 +688,172 @@ management.endpoints.web.exposure.include=*
 }
 
 ```
+
+- http://localhost:8000/actuator/httptrace
+    - http 跟踪
+ ```json
+{
+	"traces": [{
+			"timestamp": "2019-06-28T01:57:56.981Z",
+			"principal": null,
+			"session": null,
+			"request": {
+				"method": "GET",
+				"uri": "http://localhost:8000/test/hello",
+				"headers": {
+					"cookie": ["Idea-c343e724=3e5ef155-f065-4953-951c-ff94b86b9c66"],
+					"accept-language": ["zh-CN,zh;q=0.9"],
+					"upgrade-insecure-requests": ["1"],
+					"host": ["localhost:8000"],
+					"connection": ["keep-alive"],
+					"accept-encoding": ["gzip, deflate, br"],
+					"accept": ["text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"],
+					"user-agent": ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"]
+				},
+				"remoteAddress": null
+			},
+			"response": {
+				"status": 200,
+				"headers": {
+					"Content-Length": ["6"],
+					"Date": ["Fri, 28 Jun 2019 01:57:56 GMT"],
+					"Content-Type": ["text/html;charset=UTF-8"]
+				}
+			},
+			"timeTaken": 13
+		}, {
+			"timestamp": "2019-06-28T01:57:51.359Z",
+			"principal": null,
+			"session": null,
+			"request": {
+				"method": "GET",
+				"uri": "http://localhost:8000/test",
+				"headers": {
+					"cookie": ["Idea-c343e724=3e5ef155-f065-4953-951c-ff94b86b9c66"],
+					"accept-language": ["zh-CN,zh;q=0.9"],
+					"upgrade-insecure-requests": ["1"],
+					"host": ["localhost:8000"],
+					"connection": ["keep-alive"],
+					"accept-encoding": ["gzip, deflate, br"],
+					"accept": ["text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"],
+					"user-agent": ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"]
+				},
+				"remoteAddress": null
+			},
+			"response": {
+				"status": 404,
+				"headers": {}
+			},
+			"timeTaken": 4
+		}, {
+			"timestamp": "2019-06-28T01:57:40.162Z",
+			"principal": null,
+			"session": null,
+			"request": {
+				"method": "GET",
+				"uri": "http://localhost:8000/hello",
+				"headers": {
+					"cookie": ["Idea-c343e724=3e5ef155-f065-4953-951c-ff94b86b9c66"],
+					"accept-language": ["zh-CN,zh;q=0.9"],
+					"upgrade-insecure-requests": ["1"],
+					"host": ["localhost:8000"],
+					"connection": ["keep-alive"],
+					"accept-encoding": ["gzip, deflate, br"],
+					"accept": ["text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"],
+					"user-agent": ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"]
+				},
+				"remoteAddress": null
+			},
+			"response": {
+				"status": 404,
+				"headers": {}
+			},
+			"timeTaken": 16
+		}
+	]
+}
+```
+
+- http://localhost:8000/actuator/health
+    - 程序是否运行
+```json
+{"status":"UP"}
+```
+
+- http://localhost:8000/actuator/threaddump
+    - 查看线程堆栈
+```json
+ {
+			"threadName": "http-nio-8000-Acceptor",
+			"threadId": 44,
+			"blockedTime": -1,
+			"blockedCount": 0,
+			"waitedTime": -1,
+			"waitedCount": 0,
+			"lockName": null,
+			"lockOwnerId": -1,
+			"lockOwnerName": null,
+			"inNative": true,
+			"suspended": false,
+			"threadState": "RUNNABLE",
+			"stackTrace": [{
+					"methodName": "accept0",
+					"fileName": "ServerSocketChannelImpl.java",
+					"lineNumber": -2,
+					"className": "sun.nio.ch.ServerSocketChannelImpl",
+					"nativeMethod": true
+				}, {
+					"methodName": "accept",
+					"fileName": "ServerSocketChannelImpl.java",
+					"lineNumber": 422,
+					"className": "sun.nio.ch.ServerSocketChannelImpl",
+					"nativeMethod": false
+				}, {
+					"methodName": "accept",
+					"fileName": "ServerSocketChannelImpl.java",
+					"lineNumber": 250,
+					"className": "sun.nio.ch.ServerSocketChannelImpl",
+					"nativeMethod": false
+				}, {
+					"methodName": "serverSocketAccept",
+					"fileName": "NioEndpoint.java",
+					"lineNumber": 463,
+					"className": "org.apache.tomcat.util.net.NioEndpoint",
+					"nativeMethod": false
+				}, {
+					"methodName": "serverSocketAccept",
+					"fileName": "NioEndpoint.java",
+					"lineNumber": 73,
+					"className": "org.apache.tomcat.util.net.NioEndpoint",
+					"nativeMethod": false
+				}, {
+					"methodName": "run",
+					"fileName": "Acceptor.java",
+					"lineNumber": 95,
+					"className": "org.apache.tomcat.util.net.Acceptor",
+					"nativeMethod": false
+				}, {
+					"methodName": "run",
+					"fileName": "Thread.java",
+					"lineNumber": 748,
+					"className": "java.lang.Thread",
+					"nativeMethod": false
+				}
+			],
+			"lockedMonitors": [{
+					"className": "java.lang.Object",
+					"identityHashCode": 1225015795,
+					"lockedStackDepth": 2,
+					"lockedStackFrame": {
+						"methodName": "accept",
+						"fileName": "ServerSocketChannelImpl.java",
+						"lineNumber": 250,
+						"className": "sun.nio.ch.ServerSocketChannelImpl",
+						"nativeMethod": false
+					}
+				}
+			],
+			"lockedSynchronizers": [],
+			"lockInfo": null
+		}
+```
