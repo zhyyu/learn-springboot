@@ -3,6 +3,11 @@ package com.zhyyu.learn.learnspringboot.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * RestControllerTest
  * <pre>
@@ -15,7 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class RestControllerTest {
 
     @RequestMapping("/hello")
-    public String hello() {
+    public String hello(HttpServletResponse response) {
+        Cookie cookie = new Cookie("cookie-key", "cookie-value");
+//        cookie.setPath("xpath");
+//        cookie.setDomain("google.com");
+
+        response.addCookie(cookie);
         return "hello!";
     }
 
