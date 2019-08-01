@@ -35,4 +35,26 @@ public class RestControllerTest {
         return "name: " + file.getName() + ", filename: " + file.getOriginalFilename() + ", field1: " + field1 + ", pic filename:" + pic.getOriginalFilename();
     }
 
+    /**
+     * 测试mvc boolean 转换
+     * <pre>
+     *      * 2        ->> 异常
+     *      * 1        ->> true
+     *      * 0        ->> false
+     *      * -1       ->> 异常
+     *      * -2       ->> 异常
+     *      *
+     *      * 'true'   ->> true
+     *      * 'false'  ->> false
+     *      * ''       ->> 异常
+     * </pre>
+
+     * @param aBool
+     * @return
+     */
+    @RequestMapping("/test-boolean")
+    public String testBoolean(Boolean aBool) {
+        return aBool.toString();
+    }
+
 }
