@@ -1,5 +1,8 @@
 package com.zhyyu.learn.learnspringboot.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +22,28 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/test")
 public class RestControllerTest {
+
+    /**
+     * maven package error
+     * Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'outer.config.key1' in value " ${outer.config.key1} "
+     */
+//    @Value(" ${outer.config.key1} ")
+    private String key1;
+
+    @Autowired
+    private Environment environment;
+
+    @RequestMapping("/outerFromValue")
+    public String outerFromValue() {
+        return key1;
+    }
+
+    @RequestMapping("/outerFromEnv")
+    public String outerFromEnv() {
+        return environment.getProperty("outer.config.key1");
+    }
+
+
 
     @RequestMapping("/hello")
     public String hello(HttpServletResponse response) {
