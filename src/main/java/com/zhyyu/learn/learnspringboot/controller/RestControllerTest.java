@@ -55,6 +55,24 @@ public class RestControllerTest {
         return "hello!";
     }
 
+    // http code 500
+    /**
+     * HTTP/1.1 500
+     * Content-Type: text/html;charset=ISO-8859-1
+     * Content-Language: zh-CN
+     * Content-Length: 318
+     * Date: Wed, 07 Aug 2019 01:13:13 GMT
+     * Connection: close
+     *
+     * @param response
+     * @return
+     */
+    @RequestMapping("/hello2")
+    public String hello2(HttpServletResponse response) {
+        throw new RuntimeException();
+//        return "hello!";
+    }
+
     @RequestMapping("/multipartFile")
     public String multipartFile(MultipartFile file, MultipartFile pic, String field1) {
         return "name: " + file.getName() + ", filename: " + file.getOriginalFilename() + ", field1: " + field1 + ", pic filename:" + pic.getOriginalFilename();
