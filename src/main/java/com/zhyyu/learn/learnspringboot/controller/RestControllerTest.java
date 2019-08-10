@@ -163,7 +163,7 @@ public class RestControllerTest {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    static class MyObj {
+    public static class MyObj {
         private String key1;
         private String key2;
     }
