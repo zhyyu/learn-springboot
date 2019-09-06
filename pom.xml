@@ -97,6 +97,20 @@
         </dependency>-->
         <!-- ========== provider-api dependency ========== -->
 
+        <!-- test starter autoconfig -->
+        <dependency>
+            <groupId>com.zhyyu.learn</groupId>
+            <artifactId>learn-springboot-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zhyyu.learn</groupId>
+            <artifactId>learn-springboot-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
