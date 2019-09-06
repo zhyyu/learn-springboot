@@ -90,11 +90,11 @@
         </dependency>
 
         <!-- ========== provider-api dependency ========== -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.zhyyu.learn</groupId>
             <artifactId>learn-springcloud-provider-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
         <!-- ========== provider-api dependency ========== -->
 
     </dependencies>
