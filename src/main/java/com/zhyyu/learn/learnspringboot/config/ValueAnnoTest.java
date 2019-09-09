@@ -18,7 +18,7 @@ import javax.annotation.PostConstruct;
  *     2. @Autowire environment, 引用外部文件配置, 外部文件修改, environment.getProperty 不变
  * </pre>
  */
-@Component
+//@Component
 public class ValueAnnoTest {
 
     @Value(" ${server.port} ")

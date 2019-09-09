@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
  * @author juror
  * @datatime 2019/8/13 14:40
  */
-@Configuration
+//@Configuration
 public class ValueAnnoInConfiguration {
 
     @Bean
