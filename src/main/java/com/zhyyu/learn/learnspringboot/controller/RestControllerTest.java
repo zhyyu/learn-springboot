@@ -168,4 +168,21 @@ public class RestControllerTest {
         private String key2;
     }
 
+    /**
+     * * Content-Type: text/plain
+     *      * {
+     *      *  "key1":"value1",
+     *      *  "key2":"value2"
+     *      * }
+     * @return
+     *
+     *
+     *
+     * 无异常, 值注入myStr, @RequestBody 接受text/plain body, 需使用String 类型接受
+     */
+    @RequestMapping("/testTextPlain")
+    public String testTextPlain(@RequestBody String myStr) {
+        return myStr;
+    }
+
 }
