@@ -70,7 +70,12 @@ public class FileController {
     }
 
     @RequestMapping("downloadFile")
-    public ResponseEntity<Resource> downloadFile() throws IOException {
+    public ResponseEntity<Resource> downloadFile(String key1, String key2) throws IOException {
+        /* ======== test post form ========*/
+        System.out.println(key1);
+        System.out.println(key2);
+        /* ======== test post form ========*/
+
         File file = new ClassPathResource("a.xls").getFile();
         System.out.println(file);
 
@@ -86,9 +91,23 @@ public class FileController {
     }
 
     @RequestMapping("downloadFileByTransfer")
-    public ResponseEntity<Resource> downloadFileByTransfer() throws IOException {
+    public ResponseEntity<Resource> downloadFileByTransfer(String key1, String key2) throws IOException {
+        /* ======== test post form ========*/
+        System.out.println(key1);
+        System.out.println(key2);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
+        map.add("key1", key1);
+        map.add("key2", key2);
+
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(map, headers);
+        /* ======== test post form ========*/
+
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Resource> entity = restTemplate.getForEntity("http://localhost:8000/file/downloadFile", Resource.class);
+        ResponseEntity<Resource> entity = restTemplate.postForEntity("http://localhost:8000/file/downloadFile", httpEntity, Resource.class);
         return entity;
     }
 
