@@ -3,6 +3,7 @@ package com.zhyyu.learn.learnspringboot;
 import com.zhyyu.learn.learnspringboot.cors.CORSHandlerInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
  *      This is a convenience annotation that is equivalent to declaring @Configuration, @EnableAutoConfiguration and @ComponentScan.
  * </pre>
  */
+@EnableRetry
 @SpringBootApplication
 public class LearnSpringbootApplication {
 
