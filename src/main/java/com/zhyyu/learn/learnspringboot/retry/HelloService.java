@@ -12,7 +12,7 @@ public interface HelloService {
     @Retryable(
             value = { RuntimeException.class },
             maxAttempts = 3,
-            backoff = @Backoff(delay = 3000))
+            backoff = @Backoff(delay = 3000), listeners = "testRetryListener")
     void hello();
 
 }

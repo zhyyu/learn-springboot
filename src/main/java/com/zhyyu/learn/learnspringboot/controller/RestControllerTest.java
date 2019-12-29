@@ -53,12 +53,13 @@ public class RestControllerTest {
 
 
     @RequestMapping("/hello")
-    public String hello(HttpServletResponse response) {
+    public String hello(HttpServletResponse response) throws InterruptedException {
 //        Cookie cookie = new Cookie("cookie-key", "cookie-value");
 //        cookie.setPath("xpath");
 //        cookie.setDomain("google.com");
 
 //        response.addCookie(cookie);
+        Thread.sleep(6000);
         return "hello!";
     }
 

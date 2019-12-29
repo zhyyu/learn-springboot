@@ -1,17 +1,23 @@
 package com.zhyyu.learn.learnspringboot.controller;
 
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.net.ssl.SSLException;
+import java.net.UnknownHostException;
+import java.util.Arrays;
 
 /**
  * @author juror
@@ -23,12 +29,37 @@ public class RestTemplateTest {
 
     @RequestMapping("getWithoutUriVariables")
     public String getWithoutUriVariables() {
-        RestTemplate restTemplate = new RestTemplate();
+        Integer HTTP_TIME_OUT_MILLISECONDS = 1_000;
+
+        RequestConfig config = RequestConfig.custom()
+                .setConnectTimeout(HTTP_TIME_OUT_MILLISECONDS)
+                .setConnectionRequestTimeout(HTTP_TIME_OUT_MILLISECONDS)
+                .setSocketTimeout(HTTP_TIME_OUT_MILLISECONDS)
+                .build();
+        CloseableHttpClient client = HttpClientBuilder
+                .create()
+                .setDefaultRequestConfig(config)
+                .setRetryHandler(new MyDefaultHttpRequestRetryHandler(3))
+//                .disableAutomaticRetries()
+                .build();
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(client);
+
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
 
         ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://localhost:8000/test/hello", String.class);
         System.out.println(responseEntity);
 
         return responseEntity.toString();
+    }
+
+    static class MyDefaultHttpRequestRetryHandler extends DefaultHttpRequestRetryHandler {
+        public MyDefaultHttpRequestRetryHandler(int retryCount) {
+            super(retryCount, false, Arrays.asList(
+//                    InterruptedIOException.class,
+                    UnknownHostException.class,
+//                    ConnectException.class,
+                    SSLException.class));
+        }
     }
 
     @RequestMapping("getWithUriVariables")
