@@ -12,10 +12,10 @@ import java.util.concurrent.FutureTask;
 public class HelloService2 {
 
     @Trace
-    @Tag(key = "anno_tag1", value = "returnedObj")
+//    @Tag(key = "anno_tag1", value = "returnedObj")
     public String hello() {
-        ActiveSpan.tag("ActiveSpan_tag1", "ActiveSpan_tag1_val");
-        ActiveSpan.info("ActiveSpan_info_1");
+//        ActiveSpan.tag("ActiveSpan_tag1", "ActiveSpan_tag1_val");
+//        ActiveSpan.info("ActiveSpan_info_1");
         return "HelloService2 hello";
     }
 

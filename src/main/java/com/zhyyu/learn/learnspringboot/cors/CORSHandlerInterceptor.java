@@ -50,6 +50,7 @@ public class CORSHandlerInterceptor implements HandlerInterceptor {
         String origin = request.getHeader("Origin");
         if ("http://localhost:8000".equals(origin)) {
             // 配置跨域成功
+            // 注意 options 方法可能需要添加 Access-Control-Allow-Headers:*
 //            response.setHeader("Access-Control-Allow-Origin", "*");
 
             // 配置跨域成功

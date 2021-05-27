@@ -32,12 +32,19 @@ public class HelloController {
     @RequestMapping("hello3")
     public String hello3() throws InterruptedException, ExecutionException {
         log.info("hello3 info log");
-        return "hello3" + " _ " + helloService.hello() + " _ " + helloService.hello2() + " _ " + helloService2.hello() + " _ " + helloService2.hello2();
+//        return "hello3" + " _ " + helloService.hello() + " _ " + helloService.hello2() + " _ " + helloService2.hello() + " _ " + helloService2.hello2();
+//        return "hello3" + " _ " + helloService.hello2();
+        return "hello3" + " _ " + helloService.hello() + " _ " + helloService.hello2() + " _ " + helloService2.hello() + " _ " +helloService2.hello2();
     }
 
     @RequestMapping("hello4")
     public String hello4() throws InterruptedException {
         return "hello4 ret";
+    }
+
+    @RequestMapping("hello5")
+    public String hello5() throws InterruptedException {
+        throw new RuntimeException("123");
     }
 
 }
