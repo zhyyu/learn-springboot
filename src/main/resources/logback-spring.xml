@@ -6,13 +6,31 @@
 
     <appender name="Console"
               class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <!--<layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
                 %red(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
-                <!--%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n-->
+                &lt;!&ndash;%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n&ndash;&gt;
             </Pattern>
-        </layout>
+        </layout>-->
+
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%tid] [%thread] %-5level %logger{36} -%msg%n</Pattern>
+            </layout>
+        </encoder>
+
     </appender>
+
+
+    <appender name="grpc-log" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <!--<appender name="grpc-log" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender"/>-->
 
     <appender name="RollingFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -38,6 +56,7 @@
     <root level="info">
         <!--<appender-ref ref="RollingFile" />-->
         <appender-ref ref="Console" />
+        <!--<appender-ref ref="grpc-log" />-->
     </root>
 
 </configuration>

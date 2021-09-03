@@ -24,7 +24,7 @@ public class HelloService {
         String rpcRet = "";
         try {
             CloseableHttpClient httpclient = HttpClients.createDefault();
-            HttpGet httpGet = new HttpGet("http://localhost:8000/hello/hello4");
+            HttpGet httpGet = new HttpGet("http://localhost:8001/hello/hello4");
             CloseableHttpResponse response = httpclient.execute(httpGet);
             HttpEntity entity = response.getEntity();
             InputStream inputStream = entity.getContent();

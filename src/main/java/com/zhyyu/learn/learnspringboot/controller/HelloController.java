@@ -47,4 +47,10 @@ public class HelloController {
         throw new RuntimeException("123");
     }
 
+    @RequestMapping("hello6")
+    public String hello6() throws InterruptedException {
+        helloService.hello2();
+        throw new RuntimeException("hello6_exception");
+    }
+
 }
