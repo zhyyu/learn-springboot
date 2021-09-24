@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -52,5 +55,32 @@ public class HelloController {
         helloService.hello2();
         throw new RuntimeException("hello6_exception");
     }
+
+    @RequestMapping("hello7")
+    public String hello7() throws InterruptedException {
+
+        Thread oomThread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Integer> intList = new ArrayList<Integer>();
+                try {
+                    while (true) {
+                        Random random = new Random();
+                        intList.add(new Integer(random.nextInt(Integer.MAX_VALUE)));
+                    }
+                } catch (Exception e) {
+                    // oom 是error， 无法用exception try catch， 也不建议
+                    System.out.println("oom?");
+                    e.printStackTrace();
+                }
+            }
+        });
+        oomThread1.setName("oomThread1");
+        oomThread1.start();
+
+        return "hello7 return";
+    }
+
+
 
 }
