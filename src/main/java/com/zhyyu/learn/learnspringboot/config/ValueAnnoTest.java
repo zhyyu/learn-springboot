@@ -24,9 +24,14 @@ public class ValueAnnoTest {
     @Value(" ${server.port} ")
     private String serverPort;
 
+    @Value("${JAVA_HOME}")
+    private String javaHome;
+
     @PostConstruct
     private void postConstruct() {
         System.out.println("ValueAnnoTest-serverPort: " + serverPort);
+        System.out.println();
+        System.out.println("ValueAnnoTest env: " + javaHome);
     }
 
 }
